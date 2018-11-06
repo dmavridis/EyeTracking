@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,7 +49,7 @@ namespace EyeTrackingWPF
             Ellipse ellipse = new Ellipse { Width = width, Height = height };
             double left = desiredCenterX - (width / 2);
             double top = desiredCenterY - (height / 2);
-            ellipse.Fill = new SolidColorBrush() { Color=Color.FromRgb(0, 0, 255), Opacity = 0.2 };
+            ellipse.Fill = new SolidColorBrush() { Color = Color.FromRgb(0, 0, 255), Opacity = 0.2 };
             canvas.Children.Add(ellipse);
             Canvas.SetLeft(ellipse, left);
             Canvas.SetTop(ellipse, top);
@@ -58,11 +58,22 @@ namespace EyeTrackingWPF
         }
         public void ShowBubbles(List<int[]> centres, List<int> sizes)
         {
-            for(int j = 0; j < centres.Count; j++)
+            for (int j = 0; j < centres.Count; j++)
             {
                 CreateEllipse(sizes[j], sizes[j], centres[j][0], centres[j][1]);
             }
         }
+        public void ShowHeatmap(List<int[]> centres, List<int> sizes)
+        {
+            for (int j = 0; j < centres.Count; j++)
+            {
+                CreateEllipse(sizes[j], sizes[j], centres[j][0], centres[j][1]);
+            }
+        }
+
+
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Maximized;
@@ -76,7 +87,7 @@ namespace EyeTrackingWPF
             i.Stretch = Stretch.Uniform;
             //int q = src.PixelHeight;        // Image loads here
             canvas.Children.Add(i);
-            
+
             eye.Fill = new SolidColorBrush() { Color = Color.FromRgb(255, 0, 0), Opacity = 0.2 };
             canvas.Children.Add(eye);
             Canvas.SetZIndex(eye, 100);
